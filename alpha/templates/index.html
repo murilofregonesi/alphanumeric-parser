@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <form action="{{ url_for('alpha.index') }}" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="image" class="form-label">Image</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
