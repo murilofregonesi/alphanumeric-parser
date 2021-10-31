@@ -10,3 +10,4 @@ Pillow==8.4.0
 pytesseract==0.3.8
 python-dotenv==0.19.1
 Werkzeug==2.0.2
+opencv-python-headless==4.2.0.32

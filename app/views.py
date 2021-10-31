@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import cv2 as opencv
 import pytesseract
@@ -35,7 +36,7 @@ def index():
         # img = opencv.threshold(img, 180, 255, opencv.THRESH_BINARY)[1]
 
         # text detection
-        pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
+        pytesseract.pytesseract.tesseract_cmd = os.environ.get('TESSERACT_CMD')
         text = pytesseract.image_to_string(img)
 
         return render_template('index.html', detection=text)
