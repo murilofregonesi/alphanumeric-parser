@@ -1,16 +1,19 @@
 {% extends "layout.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
 
 {% block body %}
     <form action="{{ url_for('alpha.index') }}" method="POST" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
+        <div class="my-3">
+            <label for="image" class="form-label">Select or Drop an Image</label>
             <input type="file" class="form-control" id="image" name="image" accept="image/png, image/jpeg">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary w-100 mb-3">Submit</button>
     </form>
 
-    <textarea name="" id="" cols="30" rows="10">
-        {{ detection }}
-    </textarea>
+    <textarea rows="10" class="p-2">{{ detection }}</textarea>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
