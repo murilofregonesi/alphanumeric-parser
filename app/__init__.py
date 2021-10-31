@@ -12,9 +12,9 @@ def create_app():
 
     APP_MODE = os.environ.get("APP_MODE", "DEV")
     if APP_MODE == 'PRODUCTION':
-        app.config.from_object('alpha.instance.config.ProductionConfig')
+        app.config.from_object('app.instance.config.ProductionConfig')
     elif APP_MODE == 'DEV':
-        app.config.from_object('alpha.instance.config.DevelopmentConfig')
+        app.config.from_object('app.instance.config.DevelopmentConfig')
     
     app.config['APP_MODE'] = APP_MODE
 
