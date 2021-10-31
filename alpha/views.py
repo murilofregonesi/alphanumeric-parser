@@ -1,5 +1,6 @@
-import cv2 as opencv
 import numpy as np
+import cv2 as opencv
+import pytesseract
 
 from flask import (Blueprint,
                    render_template,
@@ -26,21 +27,14 @@ def index():
             return redirect(url_for('alpha.index'))
 
         img = np.fromstring(file.stream.read(), dtype='uint8')
+        img = opencv.imdecode(img, opencv.IMREAD_GRAYSCALE)
         
-        # image processing TODO
-        # img = opencv.imdecode(img, opencv.IMREAD_GRAYSCALE)
+        # image processing
         # img = opencv.GaussianBlur(img, (5, 5), 0)
         # img = opencv.Canny(img, 50, 200, 255)
+        # img = opencv.threshold(img, 180, 255, opencv.THRESH_BINARY)[1]
 
-        breakpoint()
+        # text detection
+        text = pytesseract.image_to_string(img)
 
-        """
-        'content_length' - 0
-        'content_type' - 'image/png'
-        'filename' - 'Screenshot from 2021-10-30 11-04-23.png'
-        'mimetype' - 'image/png'
-        'name' - 'image'
-        'stream' - image.stream.read() - content (tempfile.SpooledTemporaryFile)
-        """
-
-        return redirect(url_for('alpha.index'))
+        return render_template('index.html', detection=text)
