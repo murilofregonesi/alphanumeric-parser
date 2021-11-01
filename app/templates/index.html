@@ -13,7 +13,14 @@
         <button type="submit" class="btn btn-primary w-100 mb-3">Submit</button>
     </form>
 
-    <textarea rows="10" class="p-2">{{ detection }}</textarea>
+    <div class="d-flex justify-content-end align-items-end">
+        <textarea rows="10" class="p-2" id="detected-text">{{ detection }}</textarea>
+        <button class="btn btn-outline-dark py-1 position-absolute m-3" type="button"
+            onclick="copyToClipboard('detection')"
+        >
+            Copy
+        </button>
+    </div>
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 {% endblock %}
