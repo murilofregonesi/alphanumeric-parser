@@ -14,14 +14,22 @@ document.onpaste = function(event) {
     const reader = new FileReader();
 
     const items = event.clipboardData.items;
-    const blob = items[0].getAsFile();
 
-    reader.onload = function(event) {
-        axios
-            .post('/', {
-                image: event.target.result
-            })
-            .then(res => textarea.innerHTML = res.data.text);
-    };
-    reader.readAsDataURL(blob);
+    for(let item of items) {
+        if(['image/png', 'image/jpeg'].includes(item.type)) {
+            const blob = item.getAsFile();
+            if(blob) {
+                reader.onload = function(event) {
+                    console.log(event.target.result);
+                    axios
+                        .post('/', {
+                            image: event.target.result
+                        })
+                        .then(res => textarea.innerHTML = res.data.text);
+                };
+                reader.readAsDataURL(blob);
+                break;
+            }
+        }
+    }
 }
